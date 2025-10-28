@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apresentação de Formação | LiVe Consultoria & IDTech</title>
+  <title>Hub de Desenvolvimento de Liderança | LiVe Consultoria</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+  <!-- Importando Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
       --primary-bg: #06192a;
@@ -47,6 +49,8 @@
       line-height: 1.7;
       font-size: var(--font-size-base);
       overflow-x: hidden;
+      /* Textura de cubos sutis */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%230A243D' fill-opacity='0.5'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM38.59 0l-2.83 2.83 1.41 1.41L40 1.41V0h-1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
     img, picture, video, canvas, svg {
@@ -83,16 +87,35 @@
       color: var(--accent-color);
       text-shadow: var(--accent-glow);
     }
-
-    h3 {
-      font-size: var(--font-size-h3);
-      color: var(--text-primary);
+    
+    /* Título da Trilha */
+    h3.trilha-title {
+        font-size: var(--font-size-h2);
+        font-style: italic;
+        text-align: left;
+        color: var(--text-primary);
+        margin-bottom: var(--space-md);
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: var(--space-sm);
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
     }
+    h3.trilha-title i {
+        font-size: 0.8em;
+        color: var(--accent-color);
+    }
+
 
     p {
       margin-bottom: var(--space-sm);
       color: var(--text-muted);
       max-width: 700px;
+    }
+    
+    strong {
+      color: var(--text-primary);
+      font-weight: 700;
     }
 
     /* --- Classes Utilitárias --- */
@@ -107,9 +130,11 @@
       display: grid;
       gap: var(--space-md);
     }
-    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    /* Grid para 2 ou 4 itens (2x2) */
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
+    /* Grid para 3 itens (3x1) */
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    
 
     /* --- Efeito de Fade-in --- */
     .fade-in {
@@ -121,14 +146,11 @@
       opacity: 1;
       transform: translateY(0);
     }
-    /* Adicionando delay para itens da timeline */
-    .timeline-item.visible {
-      transition-delay: 0.2s;
-    }
+
 
     /* --- Header --- */
     header {
-      position: fixed;
+      position: sticky;
       top: 0;
       left: 0;
       width: 100%;
@@ -143,40 +165,43 @@
       width: auto;
     }
 
-    /* --- Seção Hero --- */
+    /* --- Seção Hero (Hub) --- */
     .hero {
-      min-height: 70vh;
+      min-height: 60vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       padding: var(--space-xl) var(--space-sm) var(--space-md);
-      margin-top: 70px; /* Altura do header */
-      background: linear-gradient(rgba(6, 25, 42, 0.7), var(--primary-bg)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?fit=crop&w=1200&q=80') no-repeat center center;
+      background: linear-gradient(rgba(6, 25, 42, 0.7), var(--primary-bg)), url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?fit=crop&w=1200&q=80') no-repeat center center;
       background-size: cover;
     }
     .hero-content {
-      max-width: 800px;
+      max-width: 900px;
     }
     .hero h1 {
       color: var(--accent-color);
       text-shadow: var(--accent-glow);
     }
     .hero p {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       color: var(--text-muted);
       margin-top: var(--space-sm);
+      font-weight: 300;
     }
 
-    /* --- Seção Sobre --- */
-    #sobre .content {
+    /* --- Seção Introdução --- */
+    #intro .content {
       max-width: 800px;
       margin: 0 auto;
       text-align: center;
     }
+     #intro .content p {
+         font-size: 1.2rem;
+     }
 
-    /* --- Cards --- */
-    .card {
+    /* --- Card de Conceito/Ferramenta --- */
+    .tool-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 12px;
@@ -185,151 +210,61 @@
       flex-direction: column;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      height: 100%; /* Para alinhar os cards no grid */
     }
-    .card:hover {
+    .tool-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0, 232, 0, 0.1);
       border-color: var(--accent-color);
     }
-    .card h3 {
-      color: var(--accent-color);
-      margin-bottom: var(--space-sm);
+    .tool-card h4 {
+        font-family: var(--font-secondary);
+        font-size: 1.75rem;
+        color: var(--accent-color);
+        margin-bottom: var(--space-sm);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
     }
-    .card p {
-      color: var(--text-subtle);
-      font-size: 0.95rem;
-      flex-grow: 1;
-    }
-
-    /* --- Metodologia (Timeline) --- */
-    .timeline {
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    /* Linha central */
-    .timeline::after {
-      content: '';
-      position: absolute;
-      width: 4px;
-      background-color: var(--border-color);
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      margin-left: -2px;
-    }
-    .timeline-item {
-      padding: var(--space-sm) 40px;
-      position: relative;
-      width: 50%;
-    }
-    /* Círculos na linha */
-    .timeline-item::after {
-      content: attr(data-step);
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      right: -25px;
-      background-color: var(--card-bg);
-      border: 4px solid var(--accent-color);
-      top: 30px;
-      border-radius: 50%;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-family: var(--font-secondary);
-      font-size: 1.2rem;
-      color: var(--accent-color);
-      box-shadow: var(--accent-glow);
-    }
-    /* Itens da Esquerda */
-    .timeline-item.left {
-      left: 0;
-      text-align: right;
-    }
-    .timeline-item.left::before { /* Seta */
-      content: " ";
-      height: 0;
-      position: absolute;
-      top: 45px;
-      width: 0;
-      z-index: 1;
-      right: 30px;
-      border: medium solid var(--border-color);
-      border-width: 10px 0 10px 10px;
-      border-color: transparent transparent transparent var(--border-color);
-    }
-    .timeline-item.left .timeline-content {
-      border-right: 3px solid var(--border-color);
-      padding-right: var(--space-sm);
-    }
-
-    /* Itens da Direita */
-    .timeline-item.right {
-      left: 50%;
-      text-align: left;
-    }
-    .timeline-item.right::before { /* Seta */
-      content: " ";
-      height: 0;
-      position: absolute;
-      top: 45px;
-      width: 0;
-      z-index: 1;
-      left: 30px;
-      border: medium solid var(--border-color);
-      border-width: 10px 10px 10px 0;
-      border-color: transparent var(--border-color) transparent transparent;
-    }
-    .timeline-item.right::after {
-      left: -25px;
-    }
-     .timeline-item.right .timeline-content {
-      border-left: 3px solid var(--border-color);
-      padding-left: var(--space-sm);
+    .tool-card h4 i {
+        font-size: 0.9em;
     }
     
-    .timeline-content {
-      padding: var(--space-sm);
-      background-color: var(--card-bg);
-      border-radius: 8px;
-      position: relative;
+    .tool-card h5 {
+        font-size: 1.1rem;
+        color: var(--text-primary);
+        font-weight: 700;
+        margin-top: var(--space-sm);
+        margin-bottom: 0.5rem;
     }
-    .timeline-content h3 {
-      color: var(--accent-color);
-    }
-    .timeline-content p {
-      font-size: 1rem;
+    
+    .tool-card p, .tool-card li {
       color: var(--text-subtle);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .tool-card ul {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 0.5rem;
+    }
+    .tool-card li {
+        position: relative;
+        padding-left: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+    .tool-card li::before {
+        content: '\f058'; /* Ícone de check do Font Awesome */
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        top: 2px;
+        color: var(--accent-color);
+        font-size: 1.1em;
     }
 
-    /* --- Clientes --- */
-    .clientes-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: var(--space-md);
-    }
-    .cliente-logo {
-      height: 60px;
-      width: auto;
-      filter: grayscale(100%) opacity(0.7);
-      transition: filter 0.3s ease;
-    }
-    .cliente-logo:hover {
-      filter: grayscale(0%) opacity(1);
-    }
-    .cliente-nome { /* Para IDTech, caso não tenha logo */
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      border: 2px dashed var(--border-color);
-      padding: var(--space-sm) var(--space-md);
-      border-radius: 8px;
-    }
 
     /* --- CTA --- */
     #cta {
@@ -392,226 +327,353 @@
 
     /* --- Responsividade --- */
     @media (max-width: 768px) {
-      .timeline::after {
-        left: 30px;
+      .hero {
+          min-height: 50vh;
       }
-      .timeline-item {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 20px;
+      .hero p {
+          font-size: 1.1rem;
       }
-      .timeline-item.left, .timeline-item.right {
-        left: 0%;
-        text-align: left;
+      h3.trilha-title {
+          font-size: 1.8rem;
       }
-      .timeline-item::after {
-        left: 5px;
-      }
-      .timeline-item.left::before, .timeline-item.right::before {
-        left: 60px;
-        border: medium solid var(--border-color);
-        border-width: 10px 10px 10px 0;
-        border-color: transparent var(--border-color) transparent transparent;
-      }
-      .timeline-item.left .timeline-content,
-      .timeline-item.right .timeline-content {
-        border: none;
-        padding: var(--space-sm);
-        border-left: 3px solid var(--border-color);
-      }
-      .timeline-item.left {
-        text-align: left;
+      /* Ajuste para 1 coluna em telas menores nos grids */
+      .grid-2, .grid-3 {
+          grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header fixo --><header>
+  
+  <!-- Header fixo -->
+  <header>
     <a href="#" class="logo">
       <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Logo%20live%20oficial-36.png" alt="LiVe Consultoria Logo">
     </a>
   </header>
   
-  <!-- Seção Hero --><section class="hero fade-in">
+  <!-- Seção Hero -->
+  <section class="hero fade-in">
     <div class="hero-content">
-      <h1>Programa de Desenvolvimento de Liderança Antifrágil</h1>
-      <p>Formação de alto impacto para líderes que precisam crescer na incerteza e transformar o caos em oportunidade.</p>
+      <h1>Hub de Desenvolvimento de Liderança</h1>
+      <p>Da Formação à Ação: Um Guia Prático para Líderes Antifrágeis.</p>
     </div>
   </section>
   
-  <!-- Seção Sobre: Missão e Filosofia --><section id="sobre" class="container fade-in">
-    <h2>O Que é Liderança Antifrágil?</h2>
+  <!-- Seção Introdução -->
+  <section id="intro" class="container fade-in">
+    <h2>Um Guia Prático para Ação</h2>
     <div class="content">
-      <p>A Liderança Antifrágil se baseia em valores universais e princípios imutáveis. É uma estrutura de pensamento que molda líderes resilientes e preparados para a incerteza.</p>
-      <p>Investigamos as forças das virtudes aplicadas à antifragilidade, entendendo as ferramentas essenciais para enfrentar adversidades e emergir fortalecido.</p>
-      <p>Unimos a isso um propósito e visão antifrágeis: a importância de um propósito claro para criar organizações que não apenas resistem, mas crescem com o caos.</p>
-    </div>
-  </section>
-  
-  <!-- Seção Perfil de Clientes --><section id="para-quem" class="container fade-in">
-    <h2>Para Quem é Esta Formação?</h2>
-    <div class="grid grid-4">
-      <div class="card">
-        <h3>Gestores e Líderes</h3>
-        <p>Profissionais em posições de gestão que buscam se adaptar e prosperar em ambientes voláteis, incertos e complexos (VUCA).</p>
-      </div>
-      <div class="card">
-        <h3>Líderes em Desenvolvimento</h3>
-        <p>Profissionais sendo preparados para assumir novos desafios de liderança e que precisam de uma base sólida para o futuro.</p>
-      </div>
-      <div class="card">
-        <h3>Empresas em Transformação</h3>
-        <p>Organizações que precisam de líderes capazes de guiar equipes em meio a mudanças, crises e reestruturações.</p>
-      </div>
-      <div class="card">
-        <h3>Empreendedores e Fundadores</h3>
-        <p>Que buscam fortalecer sua própria resiliência e aplicar os conceitos de antifragilidade para impulsionar o negócio.</p>
-      </div>
+      <p>A verdadeira liderança não é sobre teoria, é sobre <strong>ação</strong>. Esta página serve como seu guia de consulta rápida, transformando os aprendizados da nossa formação em conceitos práticos e acionáveis.</p>
+      <p>Use este material para relembrar técnicas, reforçar conceitos e aplicar o conhecimento para desenvolver a si mesmo e à sua equipe.</p>
     </div>
   </section>
 
-  <!-- Metodologia: Parceria em Fases --><section id="metodologia" class="container fade-in">
-    <h2>Como Funciona Nossa Parceria</h2>
-    <div class="timeline">
-      <div class="timeline-item left fade-in" data-step="1">
-        <div class="timeline-content">
-          <h3>Diagnóstico</h3>
-          <p>Mergulhamos no seu negócio para entender desafios e metas, utilizando nossa metodologia de Maturidade x Impacto para identificar prioridades.</p>
-        </div>
+  <!-- Trilha 1: Fundamentos da Liderança Antifrágil -->
+  <section id="trilha1" class="container fade-in">
+    <h3 class="trilha-title"><i class="fa-solid fa-shield-halved"></i>Trilha 1: Fundamentos da Liderança Antifrágil</h3>
+    <div class="grid grid-3">
+      
+      <!-- Ferramenta: Liderança Antifrágil -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-wind"></i>Liderança Antifrágil</h4>
+        <h5>O que é?</h5>
+        <p>Uma estrutura de pensamento para líderes prosperarem na incerteza. Não se trata apenas de resistir ao caos (ser robusto), mas de <strong>crescer e emergir fortalecido</strong> dele.</p>
+        <h5>Para que serve?</h5>
+        <p>Para moldar líderes resilientes, baseados em valores universais e virtudes, que conseguem enfrentar adversidades sem perder a direção.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Encare um reajuste de rota não como um fracasso, mas como um feedback valioso.</li>
+          <li>Baseie decisões difíceis em princípios imutáveis (valores), não em conveniência.</li>
+        </ul>
       </div>
-      <div class="timeline-item right fade-in" data-step="2">
-        <div class="timeline-content">
-          <h3>Planejamento</h3>
-          <p>Co-criação de plano de ação detalhado, com metas claras e cronograma realista, organizados em dashboard para total transparência.</p>
-        </div>
+
+      <!-- Ferramenta: Propósito e Visão Antifrágeis -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-flag-checkered"></i>Propósito e Visão Antifrágeis</h4>
+        <h5>O que é?</h5>
+        <p>Um propósito claro e uma visão robusta que inspiram a equipe a agir, mesmo em meio a incertezas. É a "Estrela do Norte" que guia a equipe no caos.</p>
+        <h5>Para que serve?</h5>
+        <p>Para conectar a equipe a algo maior que a tarefa diária, gerando engajamento e resiliência que resistem a crises.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Comunique o propósito de forma eficaz e constante.</li>
+          <li>Use a visão para filtrar decisões: "Isso nos aproxima do nosso propósito?"</li>
+        </ul>
       </div>
-      <div class="timeline-item left fade-in" data-step="3">
-        <div class="timeline-content">
-          <h3>Execução</h3>
-          <p>Implementação lado a lado com metodologias ágeis, proporcionando entregas rápidas e contínuas.</p>
-        </div>
+
+      <!-- Ferramenta: Liderar vs. Gerenciar -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-users-gear"></i>Liderar vs. Gerenciar</h4>
+        <h5>O que é?</h5>
+        <p>A capacidade de influenciar pessoas para o bem (Liderança) versus a administração de processos e recursos (Gestão). Um líder maduro equilibra ambos.</p>
+        <h5>Para que serve?</h5>
+        <p>Para parar de focar apenas em números e processos e passar a <strong>desenvolver, inspirar e motivar pessoas</strong>, que são quem de fato traz os resultados.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Reserve tempo para 1:1s focados em desenvolvimento, não só em tarefas.</li>
+          <li>Ao delegar, conecte a tarefa à visão maior (Liderança).</li>
+        </ul>
       </div>
-      <div class="timeline-item right fade-in" data-step="4">
-        <div class="timeline-content">
-          <h3>Acompanhamento</h3>
-          <p>Monitoramos resultados por KPIs e reuniões, ajustando estratégias para evolução contínua.</p>
-        </div>
-      </div>
+
     </div>
   </section>
 
-  <!-- Conteúdo de Formação e Ferramentas --><section id="conteudo-formacao" class="container fade-in">
-    <h2>Conteúdo Programático</h2>
+  <!-- Trilha 2: Autoconhecimento e Liderança Autêntica -->
+  <section id="trilha2" class="container fade-in">
+    <h3 class="trilha-title"><i class="fa-solid fa-user-check"></i>Trilha 2: Autoconhecimento e Liderança Autêntica</h3>
     <div class="grid grid-3">
-      <div class="card">
-        <h3>Aula 1: Fundamentos de Liderança e Propósito Antifrágil</h3>
+      
+      <!-- Ferramenta: Perfil Comportamental (DISC) -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-compass"></i>Perfil Comportamental (DISC)</h4>
+        <h5>O que é?</h5>
+        <p>Um "mapa" que identifica quatro tendências comportamentais (baseadas nos Temperamentos): Dominância, Influência, Estabilidade e Conformidade.</p>
+        <h5>Para que serve?</h5>
+        <p>Para adaptar sua comunicação, delegar tarefas, gerenciar conflitos e entender como cada perfil prospera sob estresse e desafio.</p>
+        <h5>Aplicação Prática:</h5>
         <ul>
-          <li>Definição e princípios da Liderança Antifrágil.</li>
-          <li>A importância dos valores universais e princípios imutáveis na formação do líder.</li>
-          <li>Ética aristotélica aplicada à liderança.</li>
-          <li>Liderança servidora e seu papel na construção de equipes antifrágeis.</li>
-          <li>A comunicação do propósito e da visão como ferramenta de engajamento e resiliência.</li>
+          <li>Com um 'D' (Colérico): Seja direto, foque em resultados.</li>
+          <li>Com um 'I' (Sanguíneo): Crie conexão, permita colaboração.</li>
+          <li>Com um 'S' (Fleumático): Dê segurança, explique o "porquê".</li>
+          <li>Com um 'C' (Melancólico): Dê detalhes, dados e tempo.</li>
         </ul>
       </div>
-      <div class="card">
-        <h3>Aula 2: Autoconhecimento, Perfis Comportamentais e Liderança Autêntica</h3>
+
+      <!-- Ferramenta: 12 Camadas da Personalidade -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-layer-group"></i>12 Camadas da Personalidade</h4>
+        <h5>O que é?</h5>
+        <p>Um modelo de desenvolvimento que descreve os níveis de maturidade da personalidade. Ajuda a entender as diferentes dimensões que contribuem para uma liderança antifrágil.</p>
+        <h5>Para que serve?</h5>
+        <p>Para ter autoconsciência sobre seu próprio nível de maturidade, entender as motivações reais da sua equipe e saber como ajudá-los a evoluir.</p>
+        <h5>Aplicação Prática:</h5>
         <ul>
-          <li>Análise e compreensão dos temperamentos humanos.</li>
-          <li>Modelo DISC de perfis comportamentais e sua aplicação na gestão de equipes.</li>
-          <li>As 12 Camadas da Personalidade e o desenvolvimento da maturidade emocional.</li>
-          <li>Identificação do "Perfil Antifrágil" e suas características.</li>
-          <li>Os 3 pilares da Liderança Autêntica: autoconfiança, autodisciplina e autorresponsabilidade.</li>
+          <li>Analise se sua motivação principal está na segurança (camadas iniciais) ou no propósito (camadas superiores).</li>
+          <li>Identifique se um conflito é uma disputa de ego ou um debate de ideias.</li>
         </ul>
       </div>
-      <div class="card">
-        <h3>Aula 3: Influência, Comunicação e Ferramentas Psicológicas</h3>
+
+      <!-- Ferramenta: Liderança Autêntica -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-user-shield"></i>Liderança Autêntica (Os 3 "Autos")</h4>
+        <h5>O que é?</h5>
+        <p>Um pilar para a antifragilidade baseado em <strong>Autorresponsabilidade, Autoconfiança e Autodisciplina</strong>. É sobre se desenvolver continuamente em ambientes voláteis.</p>
+        <h5>Para que serve?</h5>
+        <p>Para construir a base interna que permite ao líder adaptar-se, tomar decisões difíceis e prosperar em tempos de incerteza, em vez de apenas sobreviver.</p>
+        <h5>Aplicação Prática:</h5>
         <ul>
-          <li>Principais técnicas de influência e persuasão (PNL - Programação Neurolinguística, Dale Carnegie, "Comece pelo Porquê" de Simon Sinek).</li>
-          <li>Comunicação assertiva e eficaz em ambientes de incerteza e instabilidade.</li>
-          <li>Linguagem não verbal e modulação de voz como ferramentas de impacto.</li>
-          <li>Princípio de Oz: como assumir o protagonismo e a responsabilidade.</li>
-          <li>Estratégias para aplicação das múltiplas inteligências na liderança.</li>
+          <li>Pratique a autorresponsabilidade: foque no que você pode controlar.</li>
+          <li>Construa autoconfiança através de pequenas vitórias e aprendizado contínuo.</li>
         </ul>
       </div>
-      <div class="card">
-        <h3>Aula 4: O Líder Coach, Desenvolvimento de Equipes e Liderança em Tempos de Mudança</h3>
+
+    </div>
+  </section>
+
+  <!-- Trilha 3: Comunicação e Influência Estratégica -->
+  <section id="trilha3" class="container fade-in">
+    <h3 class="trilha-title"><i class="fa-solid fa-bullhorn"></i>Trilha 3: Comunicação e Influência Estratégica</h3>
+    <div class="grid grid-2">
+      
+      <!-- Ferramenta: "Comece pelo Porquê" -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-bullseye"></i>"Comece pelo Porquê"</h4>
+        <h5>O que é?</h5>
+        <p>Uma ferramenta de comunicação (baseada em Simon Sinek) que foca em primeiro comunicar o <strong>Propósito</strong> (O Porquê) antes de explicar o Processo (O Como) ou o Resultado (O Quê).</p>
+        <h5>Para que serve?</h5>
+        <p>Para inspirar ação e gerar antifragilidade no time. Pessoas que se conectam ao propósito são mais engajadas e resilientes em cenários instáveis.</p>
+        <h5>Aplicação Prática:</h5>
         <ul>
-          <li>Modelo de Tuckman para o desenvolvimento de equipes (Forming, Storming, Norming, Performing, Adjourning).</li>
-          <li>Teorias motivacionais (Maslow, Herzberg, Autodeterminação) e como aplicá-las em contextos VUCA.</li>
-          <li>O papel do Líder-Coach: como desenvolver e engajar talentos através do PDI (Plano de Desenvolvimento Individual) e feedback 360 graus.</li>
-          <li>Gestão de mudanças (Kotter, ADKAR) e a importância da resiliência em cenários de alta complexidade.</li>
-          <li>A aplicação dos diferentes estilos de liderança para otimizar resultados.</li>
+          <li>Ao iniciar um novo projeto, comece explicando *por que* ele é vital para a empresa.</li>
+          <li>Em feedbacks, conecte o desenvolvimento do colaborador ao *porquê* da função dele.</li>
         </ul>
       </div>
-      <div class="card">
-        <h3>Aula 5: Tomada de Decisão, Gestão de Conflitos e Plano de Ação Antifrágil</h3>
+
+      <!-- Ferramenta: PNL (Programação Neurolinguística) -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-gears"></i>PNL (Programação Neurolinguística)</h4>
+        <h5>O que é?</h5>
+        <p>Técnicas práticas de comunicação e psicologia para fortalecer a mentalidade, entender como as pessoas processam informações e construir conexões mais fortes.</p>
+        <h5>Para que serve?</h5>
+        <p>Para melhorar a persuasão, a escuta ativa (rapport) e o desempenho do time, ajustando sua linguagem para ser mais eficaz com cada perfil.</p>
+        <h5>Aplicação Prática:</h5>
         <ul>
-          <li>Ferramentas para tomada de decisão estratégica: Análise SWOT, Matriz GUT, Matriz de Decisão e Árvore de Decisão.</li>
-          <li>Técnicas eficazes para gestão de conflitos e negociação.</li>
-          <li>Feedback construtivo e sua importância na melhoria contínua da equipe.</li>
-          <li>Criação de um Plano de Ação Antifrágil: integrando todos os conhecimentos para aplicação prática no dia a dia.</li>
-          <li>Estratégias para fomentar a inovação e adaptabilidade na equipe.</li>
+          <li>Pratique o "espelhamento" sutil de linguagem corporal e tom de voz para criar rapport.</li>
+          <li>Use "ressignificação" para transformar um "problema" em um "desafio".</li>
         </ul>
       </div>
-      <div class="card">
-        <h3>Ferramentas Aplicadas ao Longo da Formação</h3>
+
+      <!-- Ferramenta: Princípio de Oz -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-road-bridge"></i>Princípio de Oz</h4>
+        <h5>O que é?</h5>
+        <p>Um modelo de <strong>autorresponsabilidade</strong> (accountability) que ensina a sair do papel de "vítima" (abaixo da linha) e assumir o controle (acima da linha).</p>
+        <h5>Para que serve?</h5>
+        <p>Para criar uma cultura de "ownership", onde a equipe para de dar desculpas ("não é minha culpa") e foca em encontrar soluções ("o que eu posso fazer?").</p>
+        <h5>Aplicação Prática:</h5>
         <ul>
-          <li>Liderança Antifrágil e seus conceitos.</li>
-          <li>Metodologia DISC e 12 Camadas da Personalidade.</li>
-          <li>PNL (Programação Neurolinguística) e Princípio de Oz.</li>
-          <li>Modelo de Tuckman para desenvolvimento de equipes.</li>
-          <li>Ferramentas de análise estratégica: SWOT, GUT, Matrizes de Decisão.</li>
-          <li>Feedback 360º e Plano de Desenvolvimento Individual (PDI).</li>
-          <li>Estratégias de gestão de mudanças (Kotter, ADKAR).</li>
+          <li>Quando um problema surgir, pergunte: "O que nós podemos fazer para resolver isso?"</li>
+          <li>Elimine do vocabulário da equipe frases como "eles não fizeram" ou "culpa do setor X".</li>
         </ul>
       </div>
+
+      <!-- Ferramenta: Comunicação Assertiva -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-comments"></i>Comunicação Assertiva Antifrágil</h4>
+        <h5>O que é?</h5>
+        <p>A habilidade de comunicar com clareza, firmeza e respeito, especialmente em tempos de turbulência, mantendo a calma e a motivação da equipe.</p>
+        <h5>Para que serve?</h5>
+        <p>Para liderar em cenários complexos, alinhar expectativas, dizer "não" de forma construtiva e evitar mal-entendidos que geram crises.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Diferencie Fatos ("O relatório atrasou 2 dias") de Opiniões ("Você é irresponsável").</li>
+          <li>Use a estrutura "Eu sinto... quando você... porque... eu gostaria que...".</li>
+        </ul>
+      </div>
+
     </div>
   </section>
   
-  <!-- Diferenciais --><section id="diferenciais" class="container fade-in">
-    <h2>Nossos Diferenciais</h2>
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>Metodologia Comprovada</h3>
-        <p>Diagnóstico de Maturidade x Impacto e execução ágil garantem resultados mensuráveis.</p>
+  <!-- Trilha 4: O Líder como Desenvolvedor -->
+  <section id="trilha4" class="container fade-in">
+    <h3 class="trilha-title"><i class="fa-solid fa-people-group"></i>Trilha 4: O Líder como Desenvolvedor</h3>
+    <div class="grid grid-2">
+      
+      <!-- Ferramenta: O Líder-Coach Antifrágil -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-hands-holding-child"></i>O Líder-Coach Antifrágil</h4>
+        <h5>O que é?</h5>
+        <p>Um estilo de liderança que atua como mentor, focado em <strong>transformar desafios em oportunidades de crescimento</strong> para a equipe.</p>
+        <h5>Para que serve?</h5>
+        <p>Para fortalecer as equipes, torná-las mais adaptáveis e identificar as necessidades de cada liderado, aumentando a confiança e a capacidade de superação em crises.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Em vez de dar a resposta, pergunte: "Qual sua sugestão para resolver isso?"</li>
+          <li>Use o PDI (Plano de Desenvolvimento Individual) como um mapa para suas conversas.</li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>Visão Integrada</h3>
-        <p>Estrategia, processos, pessoas e tecnologia conectados para máxima sinergia.</p>
+
+      <!-- Ferramenta: Estilos de Liderança -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-people-arrows"></i>Estilos de Liderança Situacional</h4>
+        <h5>O que é?</h5>
+        <p>A habilidade de adaptar seu estilo de liderança (Diretivo, Orientativo, Afiliativo, Formativo, etc.) ao cenário certo e ao nível de maturidade de cada liderado.</p>
+        <h5>Para que serve?</h5>
+        <p>Para ser o líder que a equipe precisa em cada momento. Um estilo "formativo" (coach) não funciona no meio de uma crise urgente, onde o "diretivo" é necessário.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li><strong>Crise (Tempo VUCA):</strong> Use o estilo Diretivo (claro, rápido, comando).</li>
+          <li><strong>Membro novo:</strong> Use o estilo Orientativo (ensinar, direcionar).</li>
+          <li><strong>Membro sênior:</strong> Use o estilo Delegativo (dar autonomia).</li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>Ecossistema de Parceiros</h3>
-        <p>Rede de especialistas homologados em áreas complementares para solução completa.</p>
+
+      <!-- Ferramenta: Modelo de Tuckman -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-person-digging"></i>Modelo de Tuckman</h4>
+        <h5>O que é?</h5>
+        <p>Um modelo que descreve os 4 estágios de desenvolvimento de uma equipe: Formação (Forming), Conflito (Storming), Normatização (Norming) e Performance (Performing).</p>
+        <h5>Para que serve?</h5>
+        <p>Para identificar em qual estágio sua equipe se encontra e aplicar o estilo de liderança correto, reduzindo o tempo para alcançar a alta performance.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Equipe em <strong>'Storming'</strong> (conflito): Não puna. Atue como mediador, reforce regras e objetivos.</li>
+          <li>Equipe em <strong>'Norming'</strong> (normatização): Saia do caminho. Delegue mais e atue como facilitador.</li>
+        </ul>
       </div>
+
+      <!-- Ferramenta: Teorias Motivacionais -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-lightbulb"></i>Teorias Motivacionais (Maslow, etc.)</h4>
+        <h5>O que é?</h5>
+        <p>Modelos (Maslow, Herzberg, Autodeterminação) que explicam o que motiva as pessoas. Diferencia Fatores Higiênicos (evitam insatisfação, ex: salário) de Motivacionais (geram satisfação, ex: reconhecimento).</p>
+        <h5>Para que serve?</h5>
+        <p>Para entender que "motivação" não é um botão único. Permite criar um ambiente que realmente engaja, focando em Autonomia, Competência e Relacionamento.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Entenda que um bônus (Higiene) não vai corrigir falta de reconhecimento (Motivação).</li>
+          <li>Dê mais autonomia (dentro dos limites) para tarefas, focando no resultado.</li>
+        </ul>
+      </div>
+
     </div>
   </section>
   
-  <!-- Seção Clientes (com nome/logo IDTech e os demais clientes) --><section id="clientes" class="container fade-in">
-    <h2>Clientes que Confiam em Nosso Trabalho</h2>
-    <div class="clientes-grid">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/LOGO%20VOX.png" alt="Logo Vox2you" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Logo%20okamoto.png" alt="Logo Okamoto" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Logo%20Casa%20dibs.png" alt="Logo Casa Dibs" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Logo%20TCE.png" alt="Logo TCE-RO" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Tecno%20IT.png" alt="Logo TecnoIT" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Goianita.png" alt="Logo Casa Goianita" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Uzio.png" alt="Logo Uzio Indústria" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Divina%20Pamonha.png" alt="Logo Divina Pamonha" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/melt.png" alt="Logo Melt" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/bahrem.png" alt="Logo Bahrem" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Qualiboi.png" alt="Logo Qualiboi" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/embalavac.png" alt="Logo Embalavac" class="cliente-logo" loading="lazy">
+  <!-- Trilha 5: Planejamento e Ação Antifrágil -->
+  <section id="trilha5" class="container fade-in">
+    <h3 class="trilha-title"><i class="fa-solid fa-bolt"></i>Trilha 5: Planejamento e Ação Antifrágil</h3>
+    <div class="grid grid-2">
+      
+      <!-- Ferramenta: Gestão de Mudança (Kotter/ADKAR) -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-shuffle"></i>Gestão de Mudança (Kotter/ADKAR)</h4>
+        <h5>O que é?</h5>
+        <p>Metodologias estruturadas (8 passos de Kotter, 5 fases do ADKAR) para planejar e executar mudanças organizacionais, reduzindo a resistência da equipe.</p>
+        <h5>Para que serve?</h5>
+        <p>Para garantir que uma mudança (de software, processo ou estratégia) seja de fato adotada e sustentada pela equipe, minimizando o caos e a queda de produtividade.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Antes de anunciar a mudança, "crie um senso de urgência" (Kotter).</li>
+          <li>Garanta que a equipe tenha o "Conhecimento" (ADKAR) necessário via treinamento.</li>
+        </ul>
+      </div>
+
+      <!-- Ferramenta: Análise SWOT & Matriz GUT -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-magnifying-glass-chart"></i>SWOT & Matriz GUT</h4>
+        <h5>O que é?</h5>
+        <p><strong>SWOT:</strong> Matriz para diagnóstico de Forças, Fraquezas (Internas), Oportunidades e Ameaças (Externas).<br><strong>GUT:</strong> Ferramenta para priorizar problemas por Gravidade, Urgência e Tendência.</p>
+        <h5>Para que serve?</h5>
+        <p>SWOT serve para ter um diagnóstico claro do cenário. GUT serve para decidir o que atacar primeiro quando os problemas são muitos e os recursos são limitados.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Use a SWOT em reuniões trimestrais para definir estratégias para o setor.</li>
+          <li>Quando a equipe listar 10 problemas, passe cada um pela Matriz GUT para criar um ranking claro de prioridades.</li>
+        </ul>
+      </div>
+
+      <!-- Ferramenta: Feedback Eficaz -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-message"></i>Feedback Eficaz (Fastback)</h4>
+        <h5>O que é?</h5>
+        <p>Uma técnica de comunicação direta, constante e comportamental. Abandona o "sanduíche" (elogio-crítica-elogio) em favor de conversas rápidas e focadas.</p>
+        <h5>Para que serve?</h5>
+        <p>Para desenvolver a equipe em tempo real, corrigir rotas rapidamente, construir confiança (através da honestidade) e eliminar a "cultura do medo" do feedback.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Use o "Fastback" semanal: "Acertos? Dificuldades? Erros? Meta SMART?"</li>
+          <li>Ao corrigir, foque no comportamento: "Notei que no relatório X..." em vez de "Você é...".</li>
+        </ul>
+      </div>
+      
+      <!-- Ferramenta: Planejamento Antifrágil -->
+      <div class="tool-card">
+        <h4><i class="fa-solid fa-route"></i>Planejamento Antifrágil</h4>
+        <h5>O que é?</h5>
+        <p>A aplicação prática de todos os conceitos. É a criação de um plano de ação que não apenas <strong>prevê</strong> crises, mas que <strong>se beneficia</strong> delas, preparando o líder para sair mais forte.</p>
+        <h5>Para que serve?</h5>
+        <p>Para integrar os conceitos de antifragilidade no dia a dia, criando planos com "opcionalidade" (capacidade de mudar de rota) e resiliência.</p>
+        <h5>Aplicação Prática:</h5>
+        <ul>
+          <li>Ao planejar um projeto, pergunte: "O que faríamos se nosso principal recurso falhar?"</li>
+          <li>Crie "pequenas apostas" em vez de um único "plano perfeito".</li>
+        </ul>
+      </div>
+
     </div>
   </section>
   
-  <!-- Seção CTA Final --><section class="container fade-in">
+  <!-- Seção CTA Final -->
+  <section class="container fade-in">
     <div id="cta">
-      <h2>Vamos construir juntos o próximo nível do seu negócio?</h2>
-      <p>O primeiro passo para a transformação é uma boa conversa. Agende um diagnóstico sem compromisso e descubra como a LiVe pode impulsionar seus resultados.</p>
-      <a href="https://wa.me/556284002840" class="cta-button" target="_blank">Agende seu Diagnóstico</a>
+      <h2>A prática leva à maestria.</h2>
+      <p>Estes conceitos são poderosos quando usados. Escolha um, pratique esta semana e transforme sua liderança, uma ação de cada vez.</p>
+      <a href="https://wa.me/556284002840" class="cta-button" target="_blank">Fale com um Consultor</a>
     </div>
   </section>
   
+  <!-- Footer -->
   <footer>
     <div class="footer-logo">
       <a href="#">
@@ -628,7 +690,7 @@
       const faders = document.querySelectorAll('.fade-in');
       const appearOptions = {
         threshold: 0.1, // Ativa quando 10% do item está visível
-        rootMargin: "0px 0px -50px 0px" // Começa a carregar um pouco antes de estar totalmente na tela
+        rootMargin: "0px 0px -50px 0px" // Começa a carregar um pouco antes
       };
       
       const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
@@ -647,4 +709,3 @@
   </script>
 </body>
 </html>
-
