@@ -28,94 +28,449 @@
       --space-lg: 4rem;
       --space-xl: 6rem;
     }
-    /* ... estilos padrão do sistema LiVe, copiar do modelo referência ... */
+
+    /* --- Reset Básico --- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background-color: var(--primary-bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-size: var(--font-size-base);
+      overflow-x: hidden;
+    }
+
+    img, picture, video, canvas, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--accent-color);
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: var(--text-primary);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-secondary);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: var(--space-sm);
+    }
+
+    h1 {
+      font-size: var(--font-size-h1);
+      font-style: italic;
+    }
+
+    h2 {
+      font-size: var(--font-size-h2);
+      text-align: center;
+      margin-bottom: var(--space-md);
+      color: var(--accent-color);
+      text-shadow: var(--accent-glow);
+    }
+
+    h3 {
+      font-size: var(--font-size-h3);
+      color: var(--text-primary);
+    }
+
+    p {
+      margin-bottom: var(--space-sm);
+      color: var(--text-muted);
+      max-width: 700px;
+    }
+
+    /* --- Classes Utilitárias --- */
+    .container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: var(--space-lg) var(--space-sm);
+    }
+
+    .grid {
+      display: grid;
+      gap: var(--space-md);
+    }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+    /* --- Efeito de Fade-in --- */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Adicionando delay para itens da timeline */
+    .timeline-item.visible {
+      transition-delay: 0.2s;
+    }
+
+    /* --- Header --- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: var(--space-sm) var(--space-md);
+      background-color: rgba(6, 25, 42, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    /* --- Seção Hero --- */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-xl) var(--space-sm) var(--space-md);
+      margin-top: 70px; /* Altura do header */
+      background: linear-gradient(rgba(6, 25, 42, 0.7), var(--primary-bg)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?fit=crop&w=1200&q=80') no-repeat center center;
+      background-size: cover;
+    }
+    .hero-content {
+      max-width: 800px;
+    }
+    .hero h1 {
+      color: var(--accent-color);
+      text-shadow: var(--accent-glow);
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-top: var(--space-sm);
+    }
+
+    /* --- Seção Sobre --- */
+    #sobre .content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* --- Cards --- */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 232, 0, 0.1);
+      border-color: var(--accent-color);
+    }
+    .card h3 {
+      color: var(--accent-color);
+      margin-bottom: var(--space-sm);
+    }
+    .card p {
+      color: var(--text-subtle);
+      font-size: 0.95rem;
+      flex-grow: 1;
+    }
+
+    /* --- Metodologia (Timeline) --- */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    /* Linha central */
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: var(--border-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+    .timeline-item {
+      padding: var(--space-sm) 40px;
+      position: relative;
+      width: 50%;
+    }
+    /* Círculos na linha */
+    .timeline-item::after {
+      content: attr(data-step);
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      right: -25px;
+      background-color: var(--card-bg);
+      border: 4px solid var(--accent-color);
+      top: 30px;
+      border-radius: 50%;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: var(--font-secondary);
+      font-size: 1.2rem;
+      color: var(--accent-color);
+      box-shadow: var(--accent-glow);
+    }
+    /* Itens da Esquerda */
+    .timeline-item.left {
+      left: 0;
+      text-align: right;
+    }
+    .timeline-item.left::before { /* Seta */
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 45px;
+      width: 0;
+      z-index: 1;
+      right: 30px;
+      border: medium solid var(--border-color);
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent var(--border-color);
+    }
+    .timeline-item.left .timeline-content {
+      border-right: 3px solid var(--border-color);
+      padding-right: var(--space-sm);
+    }
+
+    /* Itens da Direita */
+    .timeline-item.right {
+      left: 50%;
+      text-align: left;
+    }
+    .timeline-item.right::before { /* Seta */
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 45px;
+      width: 0;
+      z-index: 1;
+      left: 30px;
+      border: medium solid var(--border-color);
+      border-width: 10px 10px 10px 0;
+      border-color: transparent var(--border-color) transparent transparent;
+    }
+    .timeline-item.right::after {
+      left: -25px;
+    }
+     .timeline-item.right .timeline-content {
+      border-left: 3px solid var(--border-color);
+      padding-left: var(--space-sm);
+    }
+    
+    .timeline-content {
+      padding: var(--space-sm);
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      position: relative;
+    }
+    .timeline-content h3 {
+      color: var(--accent-color);
+    }
+    .timeline-content p {
+      font-size: 1rem;
+      color: var(--text-subtle);
+    }
+
+    /* --- Clientes --- */
+    .clientes-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .cliente-logo {
+      height: 60px;
+      width: auto;
+      filter: grayscale(100%) opacity(0.7);
+      transition: filter 0.3s ease;
+    }
+    .cliente-logo:hover {
+      filter: grayscale(0%) opacity(1);
+    }
+    .cliente-nome { /* Para IDTech, caso não tenha logo */
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border: 2px dashed var(--border-color);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: 8px;
+    }
+
+    /* --- CTA --- */
+    #cta {
+      background-color: var(--card-bg);
+      border: 1px solid var(--accent-color);
+      padding: var(--space-lg);
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 232, 0, 0.15);
+    }
+    #cta h2 {
+      font-size: var(--font-size-h2);
+      color: var(--text-primary);
+      text-shadow: none;
+    }
+    #cta p {
+      margin-left: auto;
+      margin-right: auto;
+      color: var(--text-muted);
+      margin-bottom: var(--space-md);
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: var(--accent-color);
+      color: var(--primary-bg);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: var(--accent-glow);
+    }
+    .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 232, 0, 1);
+      color: var(--primary-bg);
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: var(--space-lg) var(--space-sm) var(--space-md);
+      border-top: 1px solid var(--border-color);
+      margin-top: var(--space-lg);
+    }
+    .footer-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--space-sm);
+    }
+    .footer-logo img {
+      height: 60px;
+    }
+    footer p {
+      font-size: 0.9rem;
+      color: var(--text-subtle);
+      margin-bottom: 0;
+    }
+
+    /* --- Responsividade --- */
+    @media (max-width: 768px) {
+      .timeline::after {
+        left: 30px;
+      }
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 20px;
+      }
+      .timeline-item.left, .timeline-item.right {
+        left: 0%;
+        text-align: left;
+      }
+      .timeline-item::after {
+        left: 5px;
+      }
+      .timeline-item.left::before, .timeline-item.right::before {
+        left: 60px;
+        border: medium solid var(--border-color);
+        border-width: 10px 10px 10px 0;
+        border-color: transparent var(--border-color) transparent transparent;
+      }
+      .timeline-item.left .timeline-content,
+      .timeline-item.right .timeline-content {
+        border: none;
+        padding: var(--space-sm);
+        border-left: 3px solid var(--border-color);
+      }
+      .timeline-item.left {
+        text-align: left;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Header fixo -->
-  <header>
+  <!-- Header fixo --><header>
     <a href="#" class="logo">
-      <img src="https://raw.githubusercontent.com/Clebito2/ConsultoriaLive/main/Logo%20live%20oficial-21.png" alt="LiVe Consultoria Logo">
+      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Logo%20live%20oficial-36.png" alt="LiVe Consultoria Logo">
     </a>
   </header>
   
-  <!-- Seção Hero -->
-  <section class="hero fade-in">
+  <!-- Seção Hero --><section class="hero fade-in">
     <div class="hero-content">
-      <h1>Transformando Pessoas. Impulsionando Empresas.</h1>
-      <p>Formação e desenvolvimento empresarial de alto impacto para a IDTech com a metodologia LiVe Consultoria.</p>
+      <h1>Programa de Desenvolvimento de Liderança Antifrágil</h1>
+      <p>Formação de alto impacto para líderes que precisam crescer na incerteza e transformar o caos em oportunidade.</p>
     </div>
   </section>
   
-  <!-- Seção Sobre: Missão e Filosofia -->
-  <section id="sobre" class="container fade-in">
-    <h2>Nossa Missão e Filosofia</h2>
+  <!-- Seção Sobre: Missão e Filosofia --><section id="sobre" class="container fade-in">
+    <h2>O Que é Liderança Antifrágil?</h2>
     <div class="content">
-      <p>Na LiVe Consultoria, unimos planejamento e estruturação de negócios para elevar o padrão de liderança e performance em vendas da sua equipe. </p>
-      <p>Nossa missão é clara: Transformamos Pessoas. Impulsionamos Empresas.</p>
-      <p>Nossa filosofia se baseia em três pilares essenciais para alcançar alta performance: Atitude, Clareza e Ação. Acreditamos que o alto desempenho é o resultado de uma equação poderosa, e nós não apenas apontamos o caminho, mas o construímos ativamente ao seu lado, convertendo potencial em resultados concretos e sustentáveis.</p>
+      <p>A Liderança Antifrágil se baseia em valores universais e princípios imutáveis. É uma estrutura de pensamento que molda líderes resilientes e preparados para a incerteza.</p>
+      <p>Investigamos as forças das virtudes aplicadas à antifragilidade, entendendo as ferramentas essenciais para enfrentar adversidades e emergir fortalecido.</p>
+      <p>Unimos a isso um propósito e visão antifrágeis: a importância de um propósito claro para criar organizações que não apenas resistem, mas crescem com o caos.</p>
     </div>
   </section>
   
-  <!-- Seção Perfil de Clientes -->
-  <section id="para-quem" class="container fade-in">
-    <h2>Para quem é a Consultoria LiVe?</h2>
+  <!-- Seção Perfil de Clientes --><section id="para-quem" class="container fade-in">
+    <h2>Para Quem é Esta Formação?</h2>
     <div class="grid grid-4">
       <div class="card">
-        <h3>Empresas em Crescimento</h3>
-        <p>Negócios que precisam estruturar processos, tecnologia e equipes para suportar a expansão de forma sustentável e organizada.</p>
-      </div>
-      <div class="card">
         <h3>Gestores e Líderes</h3>
-        <p>Profissionais que buscam desenvolver habilidades de liderança, engajar suas equipes e otimizar a performance do seu setor.</p>
+        <p>Profissionais em posições de gestão que buscam se adaptar e prosperar em ambientes voláteis, incertos e complexos (VUCA).</p>
       </div>
       <div class="card">
-        <h3>Negócios em Reestruturação</h3>
-        <p>Empresas que necessitam de governança, modernização da gestão e planejamento sucessório.</p>
+        <h3>Líderes em Desenvolvimento</h3>
+        <p>Profissionais sendo preparados para assumir novos desafios de liderança e que precisam de uma base sólida para o futuro.</p>
       </div>
       <div class="card">
-        <h3>Empreendedores</h3>
-        <p>Fundadores que precisam validar modelos de negócio e planejar o crescimento estratégico.</p>
+        <h3>Empresas em Transformação</h3>
+        <p>Organizações que precisam de líderes capazes de guiar equipes em meio a mudanças, crises e reestruturações.</p>
+      </div>
+      <div class="card">
+        <h3>Empreendedores e Fundadores</h3>
+        <p>Que buscam fortalecer sua própria resiliência e aplicar os conceitos de antifragilidade para impulsionar o negócio.</p>
       </div>
     </div>
   </section>
 
-  <!-- Soluções e Áreas de Atuação -->
-  <section id="servicos" class="container fade-in">
-    <h2>Nossas Soluções</h2>
-    <div style="text-align:center;max-width:800px;margin:-2rem auto 3rem auto;">
-      <p>Portfólio de soluções integradas para os desafios da sua empresa.</p>
-    </div>
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>Desenvolvimento de Lideranças</h3>
-        <p>Formação baseada em liderança Antifrágil, capacitando gestores para cenários de alta complexidade e engajamento de equipes.</p>
-      </div>
-      <div class="card">
-        <h3>Inteligência Comercial e Vendas</h3>
-        <p>Estruturação de funil, análise de mercado, playbooks e CRM para gestão por dados.</p>
-      </div>
-      <div class="card">
-        <h3>Estratégia e Governança</h3>
-        <p>Planejamento estratégico, gestão de conselho, modelagem de negócios e planos de expansão.</p>
-      </div>
-      <div class="card">
-        <h3>Gestão de Pessoas</h3>
-        <p>Diagnóstico de clima, planos de cargos/salários, recrutamento, seleção e otimização de RH.</p>
-      </div>
-      <div class="card">
-        <h3>Tecnologia e Processos</h3>
-        <p>Consultoria para ERPs, automação, auditoria e melhoria de processos, sempre com metodologias ágeis.</p>
-      </div>
-      <div class="card">
-        <h3>Gestão de Reputação e Imagem</h3>
-        <p>Assessoria de imprensa, gestão de crise e relacionamento estratégico com a mídia.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Metodologia: Parceria em Fases -->
-  <section id="metodologia" class="container fade-in">
+  <!-- Metodologia: Parceria em Fases --><section id="metodologia" class="container fade-in">
     <h2>Como Funciona Nossa Parceria</h2>
     <div class="timeline">
       <div class="timeline-item left fade-in" data-step="1">
@@ -145,47 +500,75 @@
     </div>
   </section>
 
-  <!-- Conteúdo de Formação e Ferramentas -->
-  <section id="conteudo-formacao" class="container fade-in">
-    <h2>Conteúdos das Formações</h2>
+  <!-- Conteúdo de Formação e Ferramentas --><section id="conteudo-formacao" class="container fade-in">
+    <h2>Conteúdo Programático</h2>
     <div class="grid grid-3">
       <div class="card">
-        <h3>Fundamentos de Liderança e Propósito</h3>
-        <p>Princípios, ética aristotélica, liderança servidora e propósito antifrágil.</p>
+        <h3>Aula 1: Fundamentos de Liderança e Propósito Antifrágil</h3>
+        <ul>
+          <li>Definição e princípios da Liderança Antifrágil.</li>
+          <li>A importância dos valores universais e princípios imutáveis na formação do líder.</li>
+          <li>Ética aristotélica aplicada à liderança.</li>
+          <li>Liderança servidora e seu papel na construção de equipes antifrágeis.</li>
+          <li>A comunicação do propósito e da visão como ferramenta de engajamento e resiliência.</li>
+        </ul>
       </div>
       <div class="card">
-        <h3>Autoconhecimento e Perfis Comportamentais</h3>
-        <p>Temperamentos, DISC, 12 Camadas da Personalidade e maturidade.</p>
+        <h3>Aula 2: Autoconhecimento, Perfis Comportamentais e Liderança Autêntica</h3>
+        <ul>
+          <li>Análise e compreensão dos temperamentos humanos.</li>
+          <li>Modelo DISC de perfis comportamentais e sua aplicação na gestão de equipes.</li>
+          <li>As 12 Camadas da Personalidade e o desenvolvimento da maturidade emocional.</li>
+          <li>Identificação do "Perfil Antifrágil" e suas características.</li>
+          <li>Os 3 pilares da Liderança Autêntica: autoconfiança, autodisciplina e autorresponsabilidade.</li>
+        </ul>
       </div>
       <div class="card">
-        <h3>Inteligência Emocional e Liderança Autêntica</h3>
-        <p>Desenvolvimento de autoconsciência, autorregulação, empatia e habilidades sociais, liderança autêntica e resiliência.</p>
+        <h3>Aula 3: Influência, Comunicação e Ferramentas Psicológicas</h3>
+        <ul>
+          <li>Principais técnicas de influência e persuasão (PNL - Programação Neurolinguística, Dale Carnegie, "Comece pelo Porquê" de Simon Sinek).</li>
+          <li>Comunicação assertiva e eficaz em ambientes de incerteza e instabilidade.</li>
+          <li>Linguagem não verbal e modulação de voz como ferramentas de impacto.</li>
+          <li>Princípio de Oz: como assumir o protagonismo e a responsabilidade.</li>
+          <li>Estratégias para aplicação das múltiplas inteligências na liderança.</li>
+        </ul>
       </div>
       <div class="card">
-        <h3>Influência e Comunicação</h3>
-        <p>Principais técnicas (PNL, Dale Carnegie, “Comece pelo Porquê”), linguagem não verbal e modulação de voz.</p>
+        <h3>Aula 4: O Líder Coach, Desenvolvimento de Equipes e Liderança em Tempos de Mudança</h3>
+        <ul>
+          <li>Modelo de Tuckman para o desenvolvimento de equipes (Forming, Storming, Norming, Performing, Adjourning).</li>
+          <li>Teorias motivacionais (Maslow, Herzberg, Autodeterminação) e como aplicá-las em contextos VUCA.</li>
+          <li>O papel do Líder-Coach: como desenvolver e engajar talentos através do PDI (Plano de Desenvolvimento Individual) e feedback 360 graus.</li>
+          <li>Gestão de mudanças (Kotter, ADKAR) e a importância da resiliência em cenários de alta complexidade.</li>
+          <li>A aplicação dos diferentes estilos de liderança para otimizar resultados.</li>
+        </ul>
       </div>
       <div class="card">
-        <h3>Liderança em Tempos de Mudança</h3>
-        <p>Gestão de mudanças (Kotter, ADKAR), resiliência e estratégias antifrágeis.</p>
+        <h3>Aula 5: Tomada de Decisão, Gestão de Conflitos e Plano de Ação Antifrágil</h3>
+        <ul>
+          <li>Ferramentas para tomada de decisão estratégica: Análise SWOT, Matriz GUT, Matriz de Decisão e Árvore de Decisão.</li>
+          <li>Técnicas eficazes para gestão de conflitos e negociação.</li>
+          <li>Feedback construtivo e sua importância na melhoria contínua da equipe.</li>
+          <li>Criação de um Plano de Ação Antifrágil: integrando todos os conhecimentos para aplicação prática no dia a dia.</li>
+          <li>Estratégias para fomentar a inovação e adaptabilidade na equipe.</li>
+        </ul>
       </div>
       <div class="card">
-        <h3>Desenvolvimento de Equipes e Coaching</h3>
-        <p>Modelo de Tuckman, teorias motivacionais (Maslow, Herzberg, Autodeterminação), PDI e feedback 360 graus.</p>
-      </div>
-      <div class="card">
-        <h3>Tomada de Decisão e Gestão de Conflitos</h3>
-        <p>Análise SWOT, Matriz GUT, matriz e árvore de decisão, gestão de conflitos e feedback eficaz.</p>
-      </div>
-      <div class="card">
-        <h3>Ferramentas Aplicadas</h3>
-        <p>Liderança Antifrágil, DISC, 12 Camadas, PNL, Tuckman, SWOT, GUT, Feedback 360º, Plano de Desenvolvimento Individual.</p>
+        <h3>Ferramentas Aplicadas ao Longo da Formação</h3>
+        <ul>
+          <li>Liderança Antifrágil e seus conceitos.</li>
+          <li>Metodologia DISC e 12 Camadas da Personalidade.</li>
+          <li>PNL (Programação Neurolinguística) e Princípio de Oz.</li>
+          <li>Modelo de Tuckman para desenvolvimento de equipes.</li>
+          <li>Ferramentas de análise estratégica: SWOT, GUT, Matrizes de Decisão.</li>
+          <li>Feedback 360º e Plano de Desenvolvimento Individual (PDI).</li>
+          <li>Estratégias de gestão de mudanças (Kotter, ADKAR).</li>
+        </ul>
       </div>
     </div>
   </section>
   
-  <!-- Diferenciais -->
-  <section id="diferenciais" class="container fade-in">
+  <!-- Diferenciais --><section id="diferenciais" class="container fade-in">
     <h2>Nossos Diferenciais</h2>
     <div class="grid grid-3">
       <div class="card">
@@ -203,29 +586,25 @@
     </div>
   </section>
   
-  <!-- Seção Clientes (com nome/logo IDTech e os demais clientes) -->
-  <section id="clientes" class="container fade-in">
+  <!-- Seção Clientes (com nome/logo IDTech e os demais clientes) --><section id="clientes" class="container fade-in">
     <h2>Clientes que Confiam em Nosso Trabalho</h2>
     <div class="clientes-grid">
-      <img src="URL_DO_LOGO_IDTECH" alt="Logo IDTech" class="cliente-logo" loading="lazy">
-      <span class="cliente-nome">IDTech</span>
       <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/LOGO%20VOX.png" alt="Logo Vox2you" class="cliente-logo" loading="lazy">
       <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Logo%20okamoto.png" alt="Logo Okamoto" class="cliente-logo" loading="lazy">
       <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Logo%20Casa%20dibs.png" alt="Logo Casa Dibs" class="cliente-logo" loading="lazy">
       <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Logo%20TCE.png" alt="Logo TCE-RO" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Tecno%20IT.png?raw=true" alt="Logo TecnoIT" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Goianita.png?raw=true" alt="Logo Casa Goianita" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Uzio.png?raw=true" alt="Logo Uzio Indústria" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Divina%20Pamonha.png?raw=true" alt="Logo Divina Pamonha" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/melt.png?raw=true" alt="Logo Melt" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/bahrem.png?raw=true" alt="Logo Bahrem" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Qualiboi.png?raw=true" alt="Logo Qualiboi" class="cliente-logo" loading="lazy">
-      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/embalavac.png?raw=true" alt="Logo Embalavac" class="cliente-logo" loading="lazy">
+      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Tecno%20IT.png" alt="Logo TecnoIT" class="cliente-logo" loading="lazy">
+      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Goianita.png" alt="Logo Casa Goianita" class="cliente-logo" loading="lazy">
+      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Uzio.png" alt="Logo Uzio Indústria" class="cliente-logo" loading="lazy">
+      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Divina%20Pamonha.png" alt="Logo Divina Pamonha" class="cliente-logo" loading="lazy">
+      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/melt.png" alt="Logo Melt" class="cliente-logo" loading="lazy">
+      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/bahrem.png" alt="Logo Bahrem" class="cliente-logo" loading="lazy">
+      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Qualiboi.png" alt="Logo Qualiboi" class="cliente-logo" loading="lazy">
+      <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/embalavac.png" alt="Logo Embalavac" class="cliente-logo" loading="lazy">
     </div>
   </section>
   
-  <!-- Seção CTA Final -->
-  <section class="container fade-in">
+  <!-- Seção CTA Final --><section class="container fade-in">
     <div id="cta">
       <h2>Vamos construir juntos o próximo nível do seu negócio?</h2>
       <p>O primeiro passo para a transformação é uma boa conversa. Agende um diagnóstico sem compromisso e descubra como a LiVe pode impulsionar seus resultados.</p>
@@ -236,7 +615,7 @@
   <footer>
     <div class="footer-logo">
       <a href="#">
-        <img src="https://raw.githubusercontent.com/Clebito2/ConsultoriaLive/main/Logo%20live%20oficial-21.png" alt="LiVe Consultoria Logo">
+        <img src="https://raw.githubusercontent.com/Clebito2/ApresentacaoConsultoria/main/Logo%20live%20oficial-36.png" alt="LiVe Consultoria Logo">
       </a>
     </div>
     <p>Transformando Pessoas. Impulsionando Empresas.</p>
@@ -245,17 +624,27 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Script para animação de fade-in
       const faders = document.querySelectorAll('.fade-in');
-      const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+      const appearOptions = {
+        threshold: 0.1, // Ativa quando 10% do item está visível
+        rootMargin: "0px 0px -50px 0px" // Começa a carregar um pouco antes de estar totalmente na tela
+      };
+      
       const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
+          
           entry.target.classList.add('visible');
-          appearOnScroll.unobserve(entry.target);
+          appearOnScroll.unobserve(entry.target); // Para de observar depois que anima
         });
       }, appearOptions);
-      faders.forEach(fader => { appearOnScroll.observe(fader); });
+      
+      faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+      });
     });
   </script>
 </body>
 </html>
+
